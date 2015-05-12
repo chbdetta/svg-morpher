@@ -4,11 +4,9 @@ const REGX_PATH_SEPARATOR = /\B(?=[A-z])|\b(?=[A-z])|\s(?=[A-z])/;
 const REGX_CARRIER = /[\n\r]/g;
 const REGX_PAHT_NUMBER = /[+\-]*\s*[0-9\.]+/g;
 
-<<<<<<< HEAD
+
 export function analyze(node) {
-=======
-export function attributeAnalyzer(node) {
->>>>>>> 05a8dc40b4e93769dca0a4d67c1d3a94fa7b5752
+
 	var d = node.getAttribute('d');
 	d = d.replace(REGX_CARRIER, '').trim();
 	d = d.split(REGX_PATH_SEPARATOR);
