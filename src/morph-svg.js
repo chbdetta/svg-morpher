@@ -3,26 +3,15 @@ import * as easing from './utilities/easing';
 import interpolate, {match} from './utilities/interpolate';
 import Morhper from './morpher';
 
-function morph(mover, morpher, dv, pc) {
-	var d = '';
-	morpher.points.forEach(function(val, index) {
-		let vec = val.add(dv[index].scalar(pc)).add(mover.geometry);
-
-		if (index === 0 ) {
-			d += `M ${vec.x} ${vec.y}`;
-		} else {
-			d += `L ${vec.x} ${vec.y} `;
-		}
-
+function morph(from, diff, pc) {
+	var _diff = diff.map(function(val, index) {
+		return val.scalar(pc);
 	});
-
-	d += 'Z';
-
-	return d;
+	from.morph(_diff);
 }
 
 function translate(from, to, pc) {
-	return from.geometry.add(to.geometry.sub(from.geometry).scalar(pc));
+	return from.translate(to.geometry.sub(from.geometry).scalar(pc));
 }
 
 function transform(a, b, {duration, easeMode, done}) {
@@ -31,34 +20,43 @@ function transform(a, b, {duration, easeMode, done}) {
 	var ma = new Morhper(a);
 	var mb = new Morhper(b);
 
-	ma.analyze();
-	mb.analyze();
+	var _mb = new Morhper(a);
 
-	// for moving animation
-	var mover = new Morhper(ma);
-	mover.node.style.visibility = 'visible';
+	var pa = ma.analyze();
+	var pb = mb.analyze();
+
+	_mb.node = mb.node.cloneNode();
+
+	ma.fadeTo(1);
+	_mb.fadeTo(0);
 
 	a.style.visibility = 'hidden';
 	b.style.visibility = 'hidden';
 
-	var last = Date.now();
-	a.parentNode.appendChild(mover.node);
+	a.parentNode.appendChild(ma.node);
+	b.parentNode.appendChild(_mb.node);
 
-	[ma.points, mb.points] = match(ma.points, mb.points);
+	[pa, pb] = match(pa, pb);
+	ma.setPoints(pa);
+	mb.setPoints(pb);
+	_mb.setPoints(pa);
 
-	let differ = ma.points.map(function(val, index) {
-		var ret = mb.points[index].sub(val);
-		return ret;
+	var diff = ma.points.map(function(val, index) {
+		return mb.points[index].sub(val);
 	});
 
 	function _done() {
-		mover.node.parentNode.removeChild(mover.node);
+		ma.node.parentNode.removeChild(ma.node);
+		_mb.node.parentNode.removeChild(_mb.node);
+
 		b.style.visibility = 'visible';
 
 		if (done) {
 			done();
 		}
 	}
+
+	var last = Date.now();
 
 	(function run() {
 		var dur = duration;
@@ -69,8 +67,17 @@ function transform(a, b, {duration, easeMode, done}) {
 			pc = 1;
 		}
 
-		mover.geometry = translate(ma, mb, pc);
-		mover.node.setAttribute('d', morph(mover, ma, differ, pc));
+		translate(ma, mb, pc);
+		translate(_mb, mb, pc);
+
+		morph(ma, diff, pc);
+		morph(_mb, diff, pc);
+
+		ma.apply();
+		_mb.apply();
+
+		ma.fadeTo(1 - pc);
+		_mb.fadeTo(pc);
 
 		if (elapse <= dur) {
 			requestAnimationFrame(run);

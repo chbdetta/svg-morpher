@@ -10,7 +10,7 @@ import Vector from './vector';
 function interpolate(points, targetLength) {
 	var distance = Math.abs(targetLength - points.length);
 
-	console.log('start interpolate', points, 'target', targetLength);
+	//console.log('start interpolate', points, 'target', targetLength);
 
 	var ret = [];
 
@@ -41,7 +41,7 @@ function interpolate(points, targetLength) {
 		flag = !flag;
 	}
 
-	console.log('end interpolate', ret);
+	//console.log('end interpolate', ret);
 
 	return ret;
 }
