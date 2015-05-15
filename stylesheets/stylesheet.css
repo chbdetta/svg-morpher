@@ -266,8 +266,8 @@ Full-Width Styles
 
 .inner {
   position: relative;
-  max-width: 640px;
-  padding: 20px 10px;
+  width: 1000px;
+  padding: 20px 40px;
   margin: 0 auto;
 }
 
@@ -293,10 +293,6 @@ Full-Width Styles
   background: -ms-linear-gradient(top, #373737, #212121);
   background: -o-linear-gradient(top, #373737, #212121);
   background: linear-gradient(top, #373737, #212121);
-}
-
-#header_wrap .inner {
-  padding: 50px 10px 30px 10px;
 }
 
 #project_title {
@@ -358,6 +354,7 @@ Full-Width Styles
   background: #f2f2f2;
   border-top: 1px solid #111;
   border-bottom: 1px solid #111;
+  padding-bottom: 30px;
 }
 
 #main_content {
@@ -422,4 +419,19 @@ Small Device Styles
     font-size: 11px;
   }
 
+}
+
+.example {
+  padding: 10px 0;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.example svg {
+  width: 100%;
+  height: 200px;
+  padding: 10px 0;
+}
+
+.example svg .to {
+  opacity: 0;
 }
