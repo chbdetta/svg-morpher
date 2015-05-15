@@ -34,5 +34,5 @@ to build with gulp.
 Now you can find the js file in `dist/morph.js`. Put it in your webpage using `<script>` and you can use `morph()` in your scripts.
 
 # Example
-see [exmaple](chbdetta.github.io/svg-morpher/)
+see [exmaple](http://chbdetta.github.io/svg-morpher/)
 
