@@ -74,6 +74,16 @@ export function analyze(svgNode) {
 
 				ret = ret.concat(generateCurve(last, firstCtrlPoint,
 										new Vector(val.x, val.y)));
+				break;
+			case 'c':
+				ret = ret.concat(generateCurve(last, new Vector(val.x1, val.y1).add(last),
+																				new Vector(val.x2, val.y2).add(last),
+																				new Vector(val.x, val.y).add(last)));
+				break;
+			case 'q':
+				ret = ret.concat(generateCurve(last, new Vector(val.x1, val.y1).add(last),
+																				new Vector(val.x, val.y).add(last)));
+				break;
 		}
 
 		lastCurveBegin = last;

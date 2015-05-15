@@ -1,5 +1,5 @@
 import Vector from "./utilities/vector";
-import * as easing from './utilities/easing';
+import * as easeFn from './utilities/easing';
 import interpolate, {match} from './utilities/interpolate';
 import Morhper from './morpher';
 
@@ -14,7 +14,14 @@ function translate(from, to, pc) {
 	return from.translate(to.geometry.sub(from.geometry).scalar(pc));
 }
 
-function transform(a, b, {duration, easeMode, done}) {
+function transform(a, b, {duration, easing, done}) {
+
+	duration = duration || 400;
+	easing = easing || easeFn.linear;
+	if (typeof easing === 'string') {
+		easing = easeFn[easing];
+	}
+	done = done || function() {};
 
 	// for begin and ending states
 	var ma = new Morhper(a);
@@ -51,9 +58,7 @@ function transform(a, b, {duration, easeMode, done}) {
 
 		b.style.visibility = 'visible';
 
-		if (done) {
-			done();
-		}
+		done();
 	}
 
 	var last = Date.now();
@@ -62,7 +67,7 @@ function transform(a, b, {duration, easeMode, done}) {
 		var dur = duration;
 		var elapse =  Date.now() - last;
 
-		var pc = easing[easeMode](elapse / dur);
+		var pc = easing(elapse / dur);
 		if (elapse > dur) {
 			pc = 1;
 		}
