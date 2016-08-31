@@ -91,4 +91,4 @@ function transform(a, b, {duration, easing, done}) {
 	})()
 }
 
-export default transform
+module.exports = transform
