@@ -13,5 +13,9 @@
     "eslint": "^3.4.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.0"
+  },
+  "dependencies": {
+    "path-data-polyfill": "^1.0.0",
+    "pathseg": "^1.0.2"
   }
 }

@@ -1,7 +1,8 @@
 import Vector from '../utilities/vector'
+require('pathseg')
 
 export function analyze(svgNode) {
-  var segments = svgNode.pathSegList,
+  var segments = svgNode.pathSegList._list,
     points = [],
     last
 
