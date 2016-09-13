@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Morph a `<path>` into another one with smooth animation.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp && gulp watch"
   },
   "author": "chbdetta",
   "license": "MIT",
