@@ -3,14 +3,21 @@
   "version": "0.0.1",
   "description": "Morph a `<path>` into another one with smooth animation.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp && gulp watch"
   },
   "author": "chbdetta",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
     "eslint": "^3.4.0",
+    "gulp": "^3.9.1",
+    "gulp-load-plugins": "^1.3.0",
+    "vinyl-source-stream": "^1.1.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.0"
   },

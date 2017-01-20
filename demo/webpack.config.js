@@ -4,7 +4,7 @@ module.exports = {
   output: {
     filename: 'app.js',
     path: './dist',
-    publicPath: '/public/',
+    publicPath: '/dist/',
     libraryTarget: 'var',
   },
   module: {
